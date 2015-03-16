@@ -25,17 +25,17 @@ namespace WPCordovaClassLib.Cordova.Commands
                 return;
             }
 
-			var pushChannelName = this.pushOptions.ChannelName;
+            var pushChannelName = this.pushOptions.ChannelName;
             var pushChannel = HttpNotificationChannel.Find(pushChannelName);
-			var serviceName = this.pushOptions.ServiceName;
+            var serviceName = this.pushOptions.ServiceName;
             if (pushChannel == null)
             {
-				if (serviceName != null) {
-					pushChannel = new HttpNotificationChannel(pushChannelName, serviceName);
-				}
-				else {
-					pushChannel = new HttpNotificationChannel(pushChannelName);
-				}
+                if (serviceName != null) {
+                    pushChannel = new HttpNotificationChannel(pushChannelName, serviceName);
+                }
+                else {
+                    pushChannel = new HttpNotificationChannel(pushChannelName);
+                }
 
                 try
                 {
@@ -145,7 +145,7 @@ namespace WPCordovaClassLib.Cordova.Commands
                 raw.JsonContent.Add("Body", reader.ReadToEnd());
             }
 
-			this.ExecuteCallback(this.pushOptions.NotificationCallback, JsonConvert.SerializeObject(raw));
+            this.ExecuteCallback(this.pushOptions.NotificationCallback, JsonConvert.SerializeObject(raw));
         }
 
         void ExecuteCallback(string callback, string callbackResult)
@@ -209,9 +209,9 @@ namespace WPCordovaClassLib.Cordova.Commands
         {
             [DataMember(Name = "channelName", IsRequired = true)]
             public string ChannelName { get; set; }
-			
-			[DataMember(Name = "serviceName", IsRequired = false)]
-			public string ServiceName { get; set; }
+            
+            [DataMember(Name = "serviceName", IsRequired = false)]
+            public string ServiceName { get; set; }
 
             [DataMember(Name = "ecb", IsRequired = false)]
             public string NotificationCallback { get; set; }
