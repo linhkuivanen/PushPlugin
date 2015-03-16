@@ -25,10 +25,17 @@ namespace WPCordovaClassLib.Cordova.Commands
                 return;
             }
 
-            var pushChannel = HttpNotificationChannel.Find(this.pushOptions.ChannelName);
+			var pushChannelName = this.pushOptions.ChannelName;
+            var pushChannel = HttpNotificationChannel.Find(pushChannelName);
+			var serviceName = this.pushOptions.ServiceName;
             if (pushChannel == null)
             {
-                pushChannel = new HttpNotificationChannel(this.pushOptions.ChannelName);
+				if (serviceName != null) {
+					pushChannel = new HttpNotificationChannel(pushChannelName, serviceName);
+				}
+				else {
+					pushChannel = new HttpNotificationChannel(pushChannelName);
+				}
 
                 try
                 {
@@ -202,6 +209,9 @@ namespace WPCordovaClassLib.Cordova.Commands
         {
             [DataMember(Name = "channelName", IsRequired = true)]
             public string ChannelName { get; set; }
+			
+			[DataMember(Name = "serviceName", IsRequired = false)]
+			public string ServiceName { get; set; }
 
             [DataMember(Name = "ecb", IsRequired = false)]
             public string NotificationCallback { get; set; }
