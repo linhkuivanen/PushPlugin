@@ -546,6 +546,7 @@ if(device.platform == "Win32NT"){
         errorHandler,
         {
             "channelName": channelName,
+            "serviceName": serviceName,
             "ecb": "onNotificationWP8",
             "uccb": "channelHandler",
             "errcb": "jsonErrorHandler"
